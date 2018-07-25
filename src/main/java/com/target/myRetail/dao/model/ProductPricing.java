@@ -7,6 +7,8 @@ import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
 
+import com.target.myRetail.domain.CurrentPrice;
+
 @Entity
 @Data
 @Builder
@@ -15,9 +17,6 @@ public class ProductPricing {
 
 	private int productId;
 	
-	@Column(columnDefinition = "value")
-	private double priceValue;
-	
-	@Column(columnDefinition = "currency")
-	private double currency;
+	@Column(columnDefinition = "jsonb")
+	private CurrentPrice currentPrice;
 }
