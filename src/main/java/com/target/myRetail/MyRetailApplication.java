@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import com.target.myRetail.config.YAMLConfig;
 
 @SpringBootApplication
-@EnableConfigurationProperties({ YAMLConfig.class })
+// @EnableConfigurationProperties({ YAMLConfig.class })
 public class MyRetailApplication {
 
 	public static void main(String[] args) {

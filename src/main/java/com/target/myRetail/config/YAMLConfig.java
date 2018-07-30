@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties
 @Data
 public class YAMLConfig {
-
+//TODO:For external API
 //	@Value("${url}:")
 	String datasourceURL;
 //	@Value("${username}:")
