@@ -21,8 +21,8 @@ public class MyRetailController {
 	@Autowired
 	PriceDao priceDao;
 
-	@RequestMapping(path = "/products/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public Response getResponseForProductId(int productID) {
+	@RequestMapping(path = "/products/{productID}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public Response getResponseForProductId(@PathVariable int productID) {
 		Response response = Response.builder().build();
 
 		response = productInfoService.getProductInfo(productID);
