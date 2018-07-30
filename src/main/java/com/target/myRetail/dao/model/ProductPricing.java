@@ -3,6 +3,7 @@ package com.target.myRetail.dao.model;
 import java.math.BigDecimal;
 
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import lombok.Data;
@@ -21,9 +22,11 @@ public class ProductPricing {
 	}
 
 	@Id
+	@NotNull
 	private long id;
 
 	@Indexed(unique = true)
+	@NotNull
 	@Pattern(regexp = "[0-9]{1,60}")
 	private int productId;
 	@Pattern(regexp = "[0-9]{1,10}[.][0-9]{0,2}")
