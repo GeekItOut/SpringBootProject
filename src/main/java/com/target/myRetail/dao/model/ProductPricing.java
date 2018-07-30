@@ -1,22 +1,30 @@
 package com.target.myRetail.dao.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import lombok.Builder;
 import lombok.Data;
 
-import com.target.myRetail.domain.CurrentPrice;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "ProductPricing")
 @Data
-@Builder
+// @Builder
 @Table(name = "product_prices")
 public class ProductPricing {
 
-	private int productId;
+	public ProductPricing()
+	{
+		
+	}
+	@Id
+	private long id;
 	
-	@Column(columnDefinition = "jsonb")
-	private CurrentPrice currentPrice;
+	@Indexed(unique = true)
+	private int productId;
+
+	
+	private double value;
+	private String currency_code;
 }

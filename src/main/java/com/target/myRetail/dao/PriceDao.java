@@ -1,13 +1,14 @@
 package com.target.myRetail.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.target.myRetail.dao.model.ProductPricing;
-import com.target.myRetail.domain.Response;
 
 @Repository
-public interface PriceDao extends JpaRepository<ProductPricing, Long>{
+public interface PriceDao {
 
-	public Response findByProductId(int productId);
+	public ProductPricing findByProductId(int productId);
+
+	public void create(ProductPricing prices);
 }
