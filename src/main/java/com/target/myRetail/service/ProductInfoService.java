@@ -1,5 +1,8 @@
 package com.target.myRetail.service;
 
+import java.io.IOException;
+
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +16,11 @@ public class ProductInfoService {
 
 	@Autowired
 	PriceDao priceDao;
+	@Autowired
+	ProductNameService productNameService;
 
-	public Response getProductInfo(int productId) {
+	public Response getProductInfo(int productId) throws JSONException,
+			IOException {
 		Response response = Response.builder().build();
 
 		// TODO:
@@ -26,6 +32,8 @@ public class ProductInfoService {
 			currentPrice.setValue(price.getValue());
 			currentPrice.setCurrency_code(price.getCurrency_code());
 			response.setCurrentPrice(currentPrice);
+			response.setName(productNameService.getProductName(price
+					.getProductId()));
 		}
 
 		return response;
