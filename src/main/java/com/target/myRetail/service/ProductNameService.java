@@ -20,8 +20,7 @@ public class ProductNameService {
 		String productName = "Product Name does not exist for this product id";
 		String url = "https://redsky.target.com/v2/pdp/tcin/13860428?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics";
 		RestTemplate restTemplate = new RestTemplate();
-		System.out.println();
-		System.out.println();
+		;
 		ResponseEntity<String> response = restTemplate.getForEntity(url,
 				String.class);
 
