@@ -38,4 +38,24 @@ public class ProductInfoService {
 
 		return response;
 	}
+
+	public Response updateProductInfo(ProductPricing productPricing)
+			throws JSONException, IOException {
+		Response response = Response.builder().build();
+
+		// TODO:
+		// 1.A service to get product name for id
+		ProductPricing price = priceDao.update(productPricing);
+		if (price != null) {
+			response.setId(price.getProductId());
+			CurrentPrice currentPrice = CurrentPrice.builder().build();
+			currentPrice.setValue(price.getValue());
+			currentPrice.setCurrency_code(price.getCurrency_code());
+			response.setCurrentPrice(currentPrice);
+			response.setName(productNameService.getProductName(price
+					.getProductId()));
+		}
+
+		return response;
+	}
 }

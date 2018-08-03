@@ -44,7 +44,7 @@ public class MyRetailController {
 			throws JSONException, IOException {
 		Response response = Response.builder().build();
 		if (productPricing != null) {
-			updateProductPricing(productPricing);
+			response = productInfoService.updateProductInfo(productPricing);
 		} else {
 
 			response = productInfoService.getProductInfo(productID);
@@ -52,9 +52,9 @@ public class MyRetailController {
 		return response;
 	}
 
-	@ApiOperation(value = "Add a product info")
-	public void updateProductPricing(ProductPricing productPricing) {
-		priceDao.create(productPricing);
+	@ApiOperation(value = "Update a product price")
+	public ProductPricing updateProductPricing(ProductPricing productPricing) {
+		return priceDao.update(productPricing);
 
 	}
 }

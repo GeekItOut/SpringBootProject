@@ -10,4 +10,6 @@ public interface PriceDao {
 	public ProductPricing findByProductId(int productId);
 
 	public void create(ProductPricing prices);
+
+	public ProductPricing update(ProductPricing productPricing);
 }

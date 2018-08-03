@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import com.mongodb.MongoWriteException;
@@ -44,6 +45,27 @@ public class PriceDaoImpl implements PriceDao {
 			System.out.println(e.getMessage());
 		}
 
+	}
+
+	public ProductPricing update(ProductPricing prices) {
+		// TODO Auto-generated method stub
+		ProductPricing modifiedRecord = null;
+		try {
+
+			Query query = new Query();
+			query.addCriteria(Criteria.where("productId").is(prices.getId()));
+
+			Update update = new Update();
+			update.set("value", prices.getValue());
+
+			mongoTemplate.upsert(query, update, ProductPricing.class);
+
+			modifiedRecord = mongoTemplate.findOne(query, ProductPricing.class);
+
+		} catch (MongoWriteException e) {
+			System.out.println(e.getMessage());
+		}
+		return modifiedRecord;
 	}
 
 }
