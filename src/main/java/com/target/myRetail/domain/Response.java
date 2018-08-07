@@ -17,7 +17,7 @@ public class Response implements Serializable {
 	@NotNull
 	@Pattern(regexp = "[0-9]{1,60}")
 	@ApiModelProperty(notes = "The user given product ID")
-	private int id;
+	private long id;
 	@Pattern(regexp = "[a-zA-Z]{0,100}")
 	@ApiModelProperty(notes = "The name extracted from external API")
 	private String name;

@@ -50,22 +50,23 @@ public class PriceDaoImpl implements PriceDao {
 	public ProductPricing update(ProductPricing prices) {
 		// TODO Auto-generated method stub
 		ProductPricing modifiedRecord = null;
+		List<ProductPricing> price = new ArrayList<ProductPricing>();
 		try {
 
 			Query query = new Query();
-			query.addCriteria(Criteria.where("productId").is(prices.getId()));
+			query.addCriteria(Criteria.where("productId").is(prices.getProductId()));
 
 			Update update = new Update();
 			update.set("value", prices.getValue());
 
 			mongoTemplate.upsert(query, update, ProductPricing.class);
 
-			modifiedRecord = mongoTemplate.findOne(query, ProductPricing.class);
+			price = mongoTemplate.find(query, ProductPricing.class);
 
 		} catch (MongoWriteException e) {
 			System.out.println(e.getMessage());
 		}
-		return modifiedRecord;
+		return price.get(0);
 	}
 
 }

@@ -23,17 +23,10 @@ public class ProductInfoService {
 			IOException {
 		Response response = Response.builder().build();
 
-		// TODO:
 		// 1.A service to get product name for id
 		ProductPricing price = priceDao.findByProductId(productId);
 		if (price != null) {
-			response.setId(price.getProductId());
-			CurrentPrice currentPrice = CurrentPrice.builder().build();
-			currentPrice.setValue(price.getValue());
-			currentPrice.setCurrency_code(price.getCurrency_code());
-			response.setCurrentPrice(currentPrice);
-			response.setName(productNameService.getProductName(price
-					.getProductId()));
+			response = prepareResponse(price);
 		}
 
 		return response;
@@ -43,19 +36,26 @@ public class ProductInfoService {
 			throws JSONException, IOException {
 		Response response = Response.builder().build();
 
-		// TODO:
-		// 1.A service to get product name for id
+		// 1.A service to update
 		ProductPricing price = priceDao.update(productPricing);
 		if (price != null) {
-			response.setId(price.getProductId());
-			CurrentPrice currentPrice = CurrentPrice.builder().build();
-			currentPrice.setValue(price.getValue());
-			currentPrice.setCurrency_code(price.getCurrency_code());
-			response.setCurrentPrice(currentPrice);
-			response.setName(productNameService.getProductName(price
-					.getProductId()));
+			response = prepareResponse(price);
+
 		}
 
+		return response;
+	}
+
+	private Response prepareResponse(ProductPricing price)
+			throws JSONException, IOException {
+		Response response = Response.builder().build();
+		// TODO Auto-generated method stub
+		response.setId(price.getProductId());
+		CurrentPrice currentPrice = CurrentPrice.builder().build();
+		currentPrice.setValue(price.getValue());
+		currentPrice.setCurrency_code(price.getCurrency_code());
+		response.setCurrentPrice(currentPrice);
+		response.setName(productNameService.getProductName(price.getProductId()));
 		return response;
 	}
 }

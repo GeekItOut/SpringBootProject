@@ -15,7 +15,7 @@ import com.google.gson.JsonParser;
 @Service
 @Builder
 public class ProductNameService {
-	public String getProductName(int productId) throws JSONException,
+	public String getProductName(long l) throws JSONException,
 			IOException {
 		String productName = "Product Name does not exist for this product id";
 		String url = "https://redsky.target.com/v2/pdp/tcin/13860428?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics";
@@ -30,7 +30,7 @@ public class ProductNameService {
 				"available_to_promise_network");
 		int productid = productIDRoot.getAsJsonObject().get("product_id")
 				.getAsInt();
-		if (productid == productId) {
+		if (productid == l) {
 			JsonElement productDescription = product.getAsJsonObject()
 					.get("item").getAsJsonObject().get("product_description");
 
