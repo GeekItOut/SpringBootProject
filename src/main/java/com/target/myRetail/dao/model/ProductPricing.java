@@ -27,7 +27,7 @@ public class ProductPricing {
 	
 	@NotNull
 	@ApiModelProperty(notes = "The database generated ID")
-	private long id;
+	private int id;
 
 	//@Indexed(unique = true)
 	@NotNull

@@ -20,6 +20,9 @@ public class PriceDaoImpl implements PriceDao {
 	@Autowired
 	MongoTemplate mongoTemplate;
 
+	/**
+	 * This method accepts a productId and return the value associated with it
+	 */
 	@Override
 	public ProductPricing findByProductId(int productId) {
 		// TODO Auto-generated method stub
@@ -32,6 +35,9 @@ public class PriceDaoImpl implements PriceDao {
 		return price.get(0);
 	}
 
+	/**
+	 * This method creates new object
+	 */
 	@Override
 	public void create(ProductPricing prices) {
 		// TODO Auto-generated method stub
@@ -47,14 +53,18 @@ public class PriceDaoImpl implements PriceDao {
 
 	}
 
+	/**
+	 * This method updates data in database
+	 */
 	public ProductPricing update(ProductPricing prices) {
 		// TODO Auto-generated method stub
-		ProductPricing modifiedRecord = null;
+
 		List<ProductPricing> price = new ArrayList<ProductPricing>();
 		try {
 
 			Query query = new Query();
-			query.addCriteria(Criteria.where("productId").is(prices.getProductId()));
+			query.addCriteria(Criteria.where("productId").is(
+					prices.getProductId()));
 
 			Update update = new Update();
 			update.set("value", prices.getValue());

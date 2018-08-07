@@ -19,6 +19,14 @@ public class ProductInfoService {
 	@Autowired
 	ProductNameService productNameService;
 
+	/**
+	 * This method returns the response object
+	 * 
+	 * @param productId
+	 * @return
+	 * @throws JSONException
+	 * @throws IOException
+	 */
 	public Response getProductInfo(int productId) throws JSONException,
 			IOException {
 		Response response = Response.builder().build();
@@ -32,6 +40,14 @@ public class ProductInfoService {
 		return response;
 	}
 
+	/**
+	 * This method updates price
+	 * 
+	 * @param productPricing
+	 * @return
+	 * @throws JSONException
+	 * @throws IOException
+	 */
 	public Response updateProductInfo(ProductPricing productPricing)
 			throws JSONException, IOException {
 		Response response = Response.builder().build();
@@ -46,6 +62,14 @@ public class ProductInfoService {
 		return response;
 	}
 
+	/**
+	 * This method prepares the response
+	 * 
+	 * @param price
+	 * @return
+	 * @throws JSONException
+	 * @throws IOException
+	 */
 	private Response prepareResponse(ProductPricing price)
 			throws JSONException, IOException {
 		Response response = Response.builder().build();

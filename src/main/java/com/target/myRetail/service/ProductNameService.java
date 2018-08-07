@@ -5,20 +5,35 @@ import java.io.IOException;
 import lombok.Builder;
 
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.target.myRetail.config.YAMLConfig;
 
 @Service
 @Builder
 public class ProductNameService {
-	public String getProductName(long l) throws JSONException,
-			IOException {
+
+	@Autowired
+	YAMLConfig yamlConfig;
+
+	/**
+	 * This method connects to external api and return product name
+	 * @param l
+	 * @return
+	 * @throws JSONException
+	 * @throws IOException
+	 */
+	public String getProductName(long productID) throws JSONException, IOException {
+
+		String url = yamlConfig.getExternalApiURL();
+
 		String productName = "Product Name does not exist for this product id";
-		String url = "https://redsky.target.com/v2/pdp/tcin/13860428?excludes=taxonomy,price,promotion,bulk_ship,rating_and_review_reviews,rating_and_review_statistics,question_answer_statistics";
+
 		RestTemplate restTemplate = new RestTemplate();
 		;
 		ResponseEntity<String> response = restTemplate.getForEntity(url,
@@ -30,7 +45,7 @@ public class ProductNameService {
 				"available_to_promise_network");
 		int productid = productIDRoot.getAsJsonObject().get("product_id")
 				.getAsInt();
-		if (productid == l) {
+		if (productid == productID) {
 			JsonElement productDescription = product.getAsJsonObject()
 					.get("item").getAsJsonObject().get("product_description");
 
